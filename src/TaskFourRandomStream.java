@@ -20,7 +20,7 @@ public class TaskFourRandomStream {
 
     public Stream<Long> next() { // метод класу для визначееня наступного значення
         return Stream.generate(() -> {  //створюємо стрім
-            long result = (a * x.getAndIncrement() + c) % m; // результат = формула з методом getAndIncrement
+            long result = (a * x.getAndIncrement() + c) % m; // результат = формула з методом getAndIncrement що збільшує х після того як поверне
             return result;  // виводимо результат
         });
     }
