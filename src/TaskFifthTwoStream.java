@@ -8,14 +8,15 @@ public class TaskFifthTwoStream {
         Iterator<T> firstIterator = first.iterator();   // створюємо два ітератори
         Iterator<T> secondIterator = second.iterator(); // для того щоб перебрати вхідні стріми
 
-        return Stream.generate(() -> {          // одразу в ретурні створюємо стрім безкінечного розміру
+        return Stream.generate(() -> {          // одразу в ретурні створюємо стрім
                     if (firstIterator.hasNext() && secondIterator.hasNext()) {  //якщо є елемент в 1 і 2 стрімі
                         return new AbstractMap.SimpleEntry<>(firstIterator.next(), secondIterator.next());
-                        // створюємо новий абстрактний список в який задопомогою SimpleEntry  класу AbstractMap складаємо значення
+                        // створюємо новий абстрактний список в який задопомогою SimpleEntry  класу AbstractMap складаємо значення а точніше формуємо пари
                     } else {
                         return null;  // якщо один зі списків закінчився виводимо 0
                     }
                 }).takeWhile(para -> para != null)  //зупиняємо стрім при першому входженні в Елсе тобто коли немає пари елементу одного зі стрімів
+                // дослівно взяти якщо пара не нульова
                 .map(para -> Stream.of(para.getKey(), para.getValue())) //перетворюємо пари в потік
                 .flatMap(w -> w); // зливаемо пари в один потік
     }

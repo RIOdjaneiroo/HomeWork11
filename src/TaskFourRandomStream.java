@@ -30,7 +30,7 @@ public class TaskFourRandomStream {
 
         Stream<Long> randomStream = randomStrim.next();  //обчислюємо наступне значення потоку
 
-        // виводимо перших 10 випадкових чисел
+        // виводимо перших 10 випадкових чисел з потоку
         randomStream.limit(10).forEach(System.out::println);
     }
 }
