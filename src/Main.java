@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.IntPredicate;
 import java.util.stream.Collectors;
@@ -7,14 +9,24 @@ import java.util.stream.IntStream;
 public class Main {
     public static void main(String[] args) {
         // System.out.printf("Hello and welcome!");
+        List<String> list = List.of("Ihor", "Ivor", "John", "Wick", "Bob", "Marley", "Koliy", "Olya");
+        System.out.println("list = " + list);
+        printIndexElement(list);
+        System.out.println();
+        printUperElement(list);
 
-        formattedNames();
-        printStrings("Ihor", "Ivor", "John", "Wick", "Bob", "Marley","Koliy", "Olya");
-        printUperSort("Ihor", "Ivor", "John", "Wick", "Bob", "Marley", "Koliy", "Olya");
+
+
+
+        //printStrings("Ihor", "Ivor", "John", "Wick", "Bob", "Marley","Koliy", "Olya");
+        //printUperSort("Ihor", "Ivor", "John", "Wick", "Bob", "Marley", "Koliy", "Olya");
+        //formattedNames();
+
+         //printStrings(list);
     }
 
     public static void printStrings(String... names) {
-        IntPredicate isOddIndex = index -> index % 2 == 0;  // створюємо функціонального інтерфейсу, який перевіряє, чи є індекс непарним
+        IntPredicate isOddIndex = index -> index % 2 == 0;  // створюємо функціонального інтерфейсу, який включає непарні індекси
         List<String> filteredNames = IntStream.range(0, names.length)// генеруємо послідовність індексів від 0 до довжини масиву `names`
                 .filter(isOddIndex)      // фільтруємо індекси за допомогою isOddIndex
                 .mapToObj(index -> (index + 1) + ". " + names[index]) // перетворюємо індекси на рядки у вказаному форматі ("індекс. ім'я"
@@ -23,7 +35,7 @@ public class Main {
         System.out.println(String.join(", ", filteredNames));
     }
     public static void formattedNames() {
-        Collection<String> names = List.of("Ihor", "Ivor", "John", "Wick", "Bob", "Marley"); //створюємо колекцію імен
+        Collection<String> names = List.of("Ihor", "Ivor", "John", "Wick", "Bob", "Marley","Koliy", "Olya"); //створюємо колекцію імен
         String result = IntStream.range(0, names.size()) // створюємо строку послідовність range  діапазон від 0 до розміру списку
                 .filter(index -> index % 2 == 0) // фільтруємо за непарним індексом
                 .mapToObj(index -> (index + 1) + ". " + names.toArray()[index]) // Форматуємо рядок "номер. Ім'я"
@@ -43,4 +55,18 @@ public class Main {
                 .collect(Collectors.joining(", "));            // добавляємо , і пробіл між словами
         System.out.println(result);                                    // виводимо результат
     }
+
+    public static void printIndexElement(List<String> inputList) {
+        IntStream.range(0, inputList.size())
+                .filter(index -> index % 2 != 0)
+                .forEach(index -> System.out.print(index + ". " + inputList.get(index) + " "));
+    }
+    public static void printUperElement(List<String> list) {
+        List<String> result = list.stream()
+                .map(String::toUpperCase)
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
+        System.out.println(result);
+    }
+
 }
