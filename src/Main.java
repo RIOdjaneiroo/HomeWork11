@@ -13,6 +13,7 @@ public class Main {
         System.out.println("list = " + list);
         printIndexElement(list);
         System.out.println();
+        System.out.println(getIndexElement(list));
         printUperElement(list);
 
 
@@ -60,6 +61,12 @@ public class Main {
         IntStream.range(0, inputList.size())
                 .filter(index -> index % 2 != 0)
                 .forEach(index -> System.out.print(index + ". " + inputList.get(index) + " "));
+    }
+    public static String getIndexElement(List<String> inputList) {
+        return IntStream.range(0, inputList.size())
+                .filter(index -> index % 2 != 0)
+                .mapToObj(index ->index + ". " + inputList.get(index))
+                .collect(Collectors.joining(", "));
     }
     public static void printUperElement(List<String> list) {
         List<String> result = list.stream()
